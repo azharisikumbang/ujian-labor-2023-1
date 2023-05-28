@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Bulan Mei 2023 pada 12.46
+-- Waktu pembuatan: 28 Bulan Mei 2023 pada 16.43
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -63,9 +63,9 @@ CREATE TABLE `detail_transaksi` (
 --
 
 INSERT INTO `detail_transaksi` (`nofakt`, `nobrg`, `harga`, `jumlah`, `subtotal`, `diskon`, `bayar`) VALUES
-(100, 1, 6000, 5, 30000, 3000, 27000),
-(100, 2, 4000, 50, 20000, 20000, 180000),
-(101, 3, 17000, 10, 170000, 17000, 153000);
+(1, 1, 6000, 5, 30000, 3000, 27000),
+(1, 2, 4000, 50, 200000, 20000, 180000),
+(2, 3, 17000, 10, 170000, 17000, 153000);
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,46 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelg`, `nama_pelg`) VALUES
 (1, 'Rahman'),
-(2, 'Siraj');
+(2, 'Siraj'),
+(3, 'Alex'),
+(4, 'Alex'),
+(5, 'Alex'),
+(6, 'Alex'),
+(7, 'Alex'),
+(8, 'Alex'),
+(9, 'Alex'),
+(10, 'Alex'),
+(11, 'Alex'),
+(12, 'Alex'),
+(13, 'Alex'),
+(14, 'Alex'),
+(15, 'Alex'),
+(16, 'Alex'),
+(17, 'Alex'),
+(18, 'Alex'),
+(19, 'Alex'),
+(20, 'Alex'),
+(21, 'Alex'),
+(22, 'Alex'),
+(23, 'Alex'),
+(24, 'Alex'),
+(25, 'Alex'),
+(26, 'Alex'),
+(27, 'Alex'),
+(28, 'Alex'),
+(29, 'Alex'),
+(30, 'Alex'),
+(31, 'Alex'),
+(32, 'Alex'),
+(33, ''),
+(34, ''),
+(35, ''),
+(36, ''),
+(37, ''),
+(38, 'Alex'),
+(39, 'Alex'),
+(40, 'Rahman'),
+(41, 'Siraj');
 
 -- --------------------------------------------------------
 
@@ -105,8 +144,37 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`nofakt`, `id_pelg`, `tglpenjualan`, `total_diskon`, `total_bayar`) VALUES
-(100, 1, '2020-02-02', 23000, 207000),
-(101, 2, '2020-02-02', 17000, 153000);
+(1, 40, '2023-05-28', 23000, 207000),
+(2, 41, '2023-05-28', 17000, 153000);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `v_laporan`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `v_laporan` (
+`NO. FAKT` int(10)
+,`TGL PENJUALAN` date
+,`ID PELG` int(11)
+,`PELANGGAN` varchar(255)
+,`NO BRG` int(11)
+,`NAMA BARANG` varchar(255)
+,`HARGA Rp` int(11)
+,`JUMLAH` int(15)
+,`SUB TOTAL` int(15)
+,`DISKON Rp` int(11)
+,`BAYAR Rp` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `v_laporan`
+--
+DROP TABLE IF EXISTS `v_laporan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_laporan`  AS SELECT `t`.`nofakt` AS `NO. FAKT`, `t`.`tglpenjualan` AS `TGL PENJUALAN`, `t`.`id_pelg` AS `ID PELG`, `p`.`nama_pelg` AS `PELANGGAN`, `b`.`nobrg` AS `NO BRG`, `b`.`namabrg` AS `NAMA BARANG`, `dt`.`harga` AS `HARGA Rp`, `dt`.`jumlah` AS `JUMLAH`, `dt`.`subtotal` AS `SUB TOTAL`, `dt`.`diskon` AS `DISKON Rp`, `dt`.`bayar` AS `BAYAR Rp` FROM (((`transaksi` `t` join `pelanggan` `p` on(`p`.`id_pelg` = `t`.`id_pelg`)) join `detail_transaksi` `dt` on(`dt`.`nofakt` = `t`.`nofakt`)) join `barang` `b` on(`b`.`nobrg` = `dt`.`nobrg`)) ORDER BY `t`.`nofakt` ASC ;
 
 --
 -- Indexes for dumped tables
@@ -123,8 +191,7 @@ ALTER TABLE `barang`
 --
 ALTER TABLE `detail_transaksi`
   ADD KEY `nofakt` (`nofakt`,`nobrg`),
-  ADD KEY `nobrg` (`nobrg`),
-  ADD KEY `nofakt_2` (`nofakt`,`nobrg`);
+  ADD KEY `nobrg` (`nobrg`);
 
 --
 -- Indeks untuk tabel `pelanggan`
@@ -153,7 +220,13 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `nofakt` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -164,7 +237,7 @@ ALTER TABLE `pelanggan`
 --
 ALTER TABLE `detail_transaksi`
   ADD CONSTRAINT `detail_transaksi_ibfk_2` FOREIGN KEY (`nobrg`) REFERENCES `barang` (`nobrg`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detail_transaksi_ibfk_3` FOREIGN KEY (`nofakt`) REFERENCES `transaksi` (`nofakt`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `detail_transaksi_ibfk_3` FOREIGN KEY (`nofakt`) REFERENCES `transaksi` (`nofakt`);
 
 --
 -- Ketidakleluasaan untuk tabel `transaksi`
