@@ -80,9 +80,10 @@ while ($t = mysqli_fetch_assoc($query)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Penjualan Air</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
+    <div class="card-detail">
         <h3>Detail Transaksi</h3>
         <div>
             <table>

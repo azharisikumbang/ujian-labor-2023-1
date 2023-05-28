@@ -59,16 +59,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Penjualan Air</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<form action="" method="post">
-		<h3>Form Pembelian</h3>
-        <div>
-            <label>Nama Pembeli</label>
+	<form action="" method="post" class="card-container">
+		<div class="card">
+        <h3 class="title">Form Pembelian</h3>
+        <div class="form-group">
+            <label>Nama Pembeli <span>*</span></label>
             <input type="text" name="pembeli" value="<?php echo $_SESSION['pembeli'] ?? '' ?>">
         </div>
-		<div>
-			<label>Pilih Barang</label>  
+		<div class="form-group">
+			<label>Pilih Barang <span>*</span></label>  
 			<select name="nobrg">
 				<?php foreach($list_barang as $barang): ?>
 				<option value="<?php echo $barang['nobrg'] ?>">
@@ -77,16 +79,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<?php endforeach; ?>
 			</select>
 		</div>
-		<div>
-			<label>Jumlah Barang</label>
+		<div class="form-group">
+			<label>Jumlah Barang <span>*</span></label>
 			<input type="number" name="jumlah_barang">
 		</div>
-		<div>
+		<div class="form-group">
 			<button type="submit">Tambah Ke Keranjang</button>
 		</div>
+        </div>
 	</form>
 
-	<div>
+	<div class="card-belanja">
 		<h3>Daftar Belanja :</h3>
 		<table border="1" style="border-collapse: collapse">
 			<tr>

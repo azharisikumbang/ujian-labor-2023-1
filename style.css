@@ -1,0 +1,160 @@
+/* CSS untuk body */
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==================
+PEMBELIAN
+================== */
+
+/* CSS untuk card container */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+/* CSS untuk card */
+.card {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS untuk judul */
+.title {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #0a76b4;
+}
+
+/* CSS untuk form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* CSS untuk label */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* CSS untuk input dan select */
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 95%;
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+label span {
+  color: red;
+}
+
+/* CSS untuk tombol */
+.form-group button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.form-group button:hover {
+  background-color: #0056b3;
+}
+
+/* ==================
+DAFTAR BELANJA
+================== */
+
+/* CSS untuk card belanja */
+.card-belanja {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS untuk judul */
+h3 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* CSS untuk tabel */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+/* CSS untuk header tabel */
+th {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+}
+
+/* CSS untuk sel data */
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+/* CSS untuk kolom total bayar */
+td[colspan="5"] {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* CSS untuk link beli barang */
+a {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  background-color: #0056b3;
+}
+
+/* ==================
+DETAIL TRANSAKSI
+================== */
+.card-detail {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
