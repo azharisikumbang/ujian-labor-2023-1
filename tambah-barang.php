@@ -48,6 +48,9 @@ while($barang = mysqli_fetch_assoc($query)) {
         <li>
             <a href="./tambah-barang.php">Tambah Data Barang</a>
         </li>
+        <li>
+            <a href="./laporan-penjualan.php">Download Laporan</a>
+        </li>
     </ul>
 </nav>
 <form action="" method="post" class="card-container">
