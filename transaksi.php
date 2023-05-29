@@ -2,10 +2,17 @@
 
 session_start();
 
-if(empty($_SESSION)) {
+// alihkan ke halaman login jika belum login
+if(empty($_SESSION) || !isset($_SESSION['user']) || $_SESSION['user']['username'] == '') {
+    header("Location: ./login.php");
+    exit();
+}
+
+if(!isset($_SESSION['keranjang']) || count($_SESSION['keranjang']) < 1) {
     echo "Keranjang belanja masih kosong. Silahkan lakukan <a href='./penjualan.php'>pembelian</a>.";
     exit();
 }
+
 
 $database = require_once './database.php';
 
@@ -36,7 +43,9 @@ foreach($_SESSION['keranjang'] as $barang) {
 }
 
 // kosongkan keranjang
-session_destroy();
+$_SESSION = [
+        'user' => $_SESSION['user']
+];
 
 // dapatkan data pembelian
 $query = mysqli_query(
@@ -113,16 +122,16 @@ while ($t = mysqli_fetch_assoc($query)) {
             <?php foreach ($transaksi['barang'] as $barang): ?>
                 <tr>
                     <td><?php echo $barang['namabrg'] ?></td>
-                    <td><?php echo $barang['harga'] ?></td>
+                    <td>Rp <?php echo number_format($barang['harga'], 0, ".", ".") ?></td>
                     <td><?php echo $barang['jumlah'] ?></td>
-                    <td><?php echo $barang['subtotal'] ?></td>
-                    <td><?php echo $barang['diskon'] ?></td>
-                    <td><?php echo $barang['bayar'] ?></td>
+                    <td>Rp <?php echo number_format($barang['subtotal'], 0, ".", ".") ?></td>
+                    <td>Rp <?php echo number_format($barang['diskon'], 0, ".", ".") ?></td>
+                    <td>Rp <?php echo number_format($barang['bayar'], 0, ".", ".") ?></td>
                 </tr>
             <?php endforeach; ?>
             <tr>
                 <td colspan="5">Total Bayar:</td>
-                <td><?php echo $transaksi['total_bayar'] ?></td>
+                <td>Rp <?php echo number_format($transaksi['total_bayar'], 0, ".", ".") ?></td>
             </tr>
         </table>
         <div>
