@@ -50,6 +50,7 @@ PEMBELIAN
 
 /* CSS untuk input dan select */
 .form-group input[type="text"],
+.form-group input[type="password"],
 .form-group input[type="number"] {
   width: 95%;
   padding: 8px;
@@ -89,7 +90,7 @@ DAFTAR BELANJA
 
 /* CSS untuk card belanja */
 .card-belanja {
-  max-width: 600px;
+  max-width: 960px;
   margin: 40px auto;
   background-color: #fff;
   border-radius: 5px;
@@ -151,10 +152,19 @@ a:hover {
 DETAIL TRANSAKSI
 ================== */
 .card-detail {
-  max-width: 600px;
+  max-width: 960px;
   margin: 40px auto;
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Menu atas */
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline-table;
 }

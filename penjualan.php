@@ -2,13 +2,20 @@
 
 session_start();
 
+// alihkan ke halaman login jika belum login
+if(empty($_SESSION) || !isset($_SESSION['user']) || $_SESSION['user']['username'] == '') {
+    header("Location: ./login.php");
+    exit();
+}
+
 // buat keranjang pembelian
 if(!isset($_SESSION['total']) || $_SESSION['total'] == 0) {
     $_SESSION = [
         'total' => 0,
         'diskon' => 0,
         'keranjang' => [],
-        'pembeli' => null
+        'pembeli' => null,
+        'user' => $_SESSION['user']
     ];
 }
 
@@ -62,6 +69,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav>
+        <ul>
+            <li>
+                <a href="./penjualan.php">Beli Barang</a>
+            </li>
+            <li>
+                <a href="./tambah-barang.php">Tambah Data Barang</a>
+            </li>
+        </ul>
+    </nav>
 	<form action="" method="post" class="card-container">
 		<div class="card">
         <h3 class="title">Form Pembelian</h3>
@@ -74,7 +91,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<select name="nobrg">
 				<?php foreach($list_barang as $barang): ?>
 				<option value="<?php echo $barang['nobrg'] ?>">
-					<?php echo $barang['namabrg'] ?> - Rp <?php echo number_format($barang['harga'], 0, ".", ".") ?>
+                        <?php echo $barang['namabrg'] ?> - Rp <?php echo number_format($barang['harga'], 0, ".", ".") ?>
 				</option>
 				<?php endforeach; ?>
 			</select>
@@ -88,7 +105,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</div>
         </div>
 	</form>
-
 	<div class="card-belanja">
 		<h3>Daftar Belanja :</h3>
 		<table border="1" style="border-collapse: collapse">
@@ -103,16 +119,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php foreach ($_SESSION['keranjang'] as $barang): ?>
             <tr>
                 <td><?php echo $barang['namabrg'] ?></td>
-                <td><?php echo $barang['harga'] ?></td>
+                <td>Rp <?php echo number_format($barang['harga'], 0, ".", ".") ?></td>
                 <td><?php echo $barang['jumlah_beli'] ?></td>
-                <td><?php echo $barang['subtotal'] ?></td>
-                <td><?php echo $barang['diskon'] ?></td>
-                <td><?php echo $barang['bayar'] ?></td>
+                <td>Rp <?php echo number_format($barang['subtotal'], 0, ".", ".") ?></td>
+                <td>Rp <?php echo number_format($barang['diskon'], 0, ".", ".") ?></td>
+                <td>Rp <?php echo number_format($barang['bayar'], 0, ".", ".") ?></td>
             </tr>
             <?php endforeach; ?>
             <tr>
                 <td colspan="5">Total Bayar:</td>
-                <td><?php echo $_SESSION['total'] ?></td>
+                <td>Rp <?php echo number_format($_SESSION['total'], 0, ".", ".") ?></td>
             </tr>
 		</table>
         <div>
