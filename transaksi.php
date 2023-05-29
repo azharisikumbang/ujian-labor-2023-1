@@ -82,6 +82,7 @@ while ($t = mysqli_fetch_assoc($query)) {
     <title>Penjualan Air</title>
 </head>
 <body>
+    <p><a href="./laporan-penjualan.php">Download Laporan Penjualan</a></p>
     <div>
         <h3>Detail Transaksi</h3>
         <div>

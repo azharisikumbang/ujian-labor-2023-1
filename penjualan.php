@@ -61,6 +61,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<title>Penjualan Air</title>
 </head>
 <body>
+    <p><a href="./laporan-penjualan.php">Download Laporan Penjualan</a></p>
 	<form action="" method="post">
 		<h3>Form Pembelian</h3>
         <div>
@@ -85,7 +86,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<button type="submit">Tambah Ke Keranjang</button>
 		</div>
 	</form>
-
 	<div>
 		<h3>Daftar Belanja :</h3>
 		<table border="1" style="border-collapse: collapse">
