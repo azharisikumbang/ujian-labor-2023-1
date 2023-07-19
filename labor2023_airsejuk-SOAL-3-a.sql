@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Bulan Mei 2023 pada 16.31
+-- Waktu pembuatan: 12 Jul 2023 pada 18.11
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -40,7 +40,10 @@ CREATE TABLE `barang` (
 INSERT INTO `barang` (`nobrg`, `namabrg`, `harga`) VALUES
 (1, 'Air Galon', 6000),
 (2, 'Air Botol 1500ml', 4000),
-(3, 'Air Dalam Kemasan 240ml', 17000);
+(3, 'Air Dalam Kemasan 240ml', 17000),
+(4, 'Mie Goreng', 25000),
+(5, 'Mie Sedap', 3000),
+(6, 'Pepsodent', 6500);
 
 -- --------------------------------------------------------
 
@@ -58,6 +61,17 @@ CREATE TABLE `detail_transaksi` (
   `bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`nofakt`, `nobrg`, `harga`, `jumlah`, `subtotal`, `diskon`, `bayar`) VALUES
+(1, 1, 6000, 5, 30000, 3000, 27000),
+(1, 2, 4000, 50, 200000, 20000, 180000),
+(2, 3, 17000, 10, 170000, 17000, 153000),
+(3, 3, 17000, 84, 1428000, 142800, 1285200),
+(4, 1, 6000, 3, 18000, 1800, 16200);
+
 -- --------------------------------------------------------
 
 --
@@ -74,45 +88,34 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id_pelg`, `nama_pelg`) VALUES
-(1, 'Rahman'),
-(2, 'Siraj'),
-(3, 'Alex'),
-(4, 'Alex'),
-(5, 'Alex'),
-(6, 'Alex'),
-(7, 'Alex'),
-(8, 'Alex'),
-(9, 'Alex'),
-(10, 'Alex'),
-(11, 'Alex'),
-(12, 'Alex'),
-(13, 'Alex'),
-(14, 'Alex'),
-(15, 'Alex'),
-(16, 'Alex'),
-(17, 'Alex'),
-(18, 'Alex'),
-(19, 'Alex'),
-(20, 'Alex'),
-(21, 'Alex'),
-(22, 'Alex'),
-(23, 'Alex'),
-(24, 'Alex'),
-(25, 'Alex'),
-(26, 'Alex'),
-(27, 'Alex'),
-(28, 'Alex'),
-(29, 'Alex'),
-(30, 'Alex'),
-(31, 'Alex'),
-(32, 'Alex'),
-(33, ''),
-(34, ''),
-(35, ''),
-(36, ''),
-(37, ''),
-(38, 'Alex'),
-(39, 'Alex');
+(1, 'Alex'),
+(2, 'Alex'),
+(3, 'Joni'),
+(4, 'Rahman'),
+(5, 'Rahman'),
+(6, 'Rahman'),
+(7, 'Siraj'),
+(8, 'Sapiente minima plac'),
+(9, 'Joni');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengguna`
+--
+
+CREATE TABLE `pengguna` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pengguna`
+--
+
+INSERT INTO `pengguna` (`id`, `username`, `password`) VALUES
+(1, 'admin', '$2y$10$Iz8G4l0JQqRBwImvk.mAhuyVTjrE.NN5xsbqueihHyPGZbyg.4LNK');
 
 -- --------------------------------------------------------
 
@@ -127,6 +130,16 @@ CREATE TABLE `transaksi` (
   `total_diskon` int(11) NOT NULL,
   `total_bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`nofakt`, `id_pelg`, `tglpenjualan`, `total_diskon`, `total_bayar`) VALUES
+(1, 6, '2023-05-29', 23000, 207000),
+(2, 7, '2023-05-29', 17000, 153000),
+(3, 8, '2023-05-29', 142800, 1285200),
+(4, 9, '2023-06-03', 1800, 16200);
 
 -- --------------------------------------------------------
 
@@ -181,6 +194,13 @@ ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelg`);
 
 --
+-- Indeks untuk tabel `pengguna`
+--
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
@@ -195,19 +215,25 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `nobrg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nobrg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_pelg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengguna`
+--
+ALTER TABLE `pengguna`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `nofakt` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `nofakt` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
